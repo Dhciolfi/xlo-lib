@@ -54,7 +54,7 @@ class OrderByField extends StatelessWidget {
                 ),
                 alignment: Alignment.center,
                 child: Text(
-                  'Data',
+                  'Preço',
                   style: TextStyle(
                       color: state.value == OrderBy.PRICE ? Colors.white : Colors.black
                   ),
