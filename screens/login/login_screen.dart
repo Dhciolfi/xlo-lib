@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:xlo/blocs/login/field_state.dart';
+import 'package:xlo/blocs/login/login_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -6,6 +8,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  LoginBloc _loginBloc = LoginBloc();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,14 +43,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ),
-              StreamBuilder(
+              StreamBuilder<FieldState>(
+
                 builder: (context, snapshot){
                   return TextField(
                     keyboardType: TextInputType.emailAddress,
                     autocorrect: false,
                     decoration: InputDecoration(
-                      border: const OutlineInputBorder()
+                      border: const OutlineInputBorder(),
+                      errorText: snapshot.data.error,
                     ),
+                    onChanged: _loginBloc.changeEmail,
+                    enabled: snapshot.data.enabled,
                   );
                 },
               ),
@@ -78,14 +87,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   ],
                 ),
               ),
-              StreamBuilder(
+              StreamBuilder<FieldState>(
                 builder: (context, snapshot){
                   return TextField(
                     autocorrect: false,
                     obscureText: true,
                     decoration: InputDecoration(
-                        border: const OutlineInputBorder()
+                      border: const OutlineInputBorder(),
+                      errorText: snapshot.data.error,
                     ),
+                    onChanged: _loginBloc.changePassword,
+                    enabled: snapshot.data.enabled,
                   );
                 },
               ),
