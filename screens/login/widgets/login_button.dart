@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:xlo/blocs/login/button_state.dart';
+import 'package:xlo/blocs/login/login_bloc.dart';
 
 class LoginButton extends StatelessWidget {
+
+  LoginButton(this.loginBloc);
+
+  final LoginBloc loginBloc;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 24),
       height: 50,
       child: StreamBuilder<ButtonState>(
+        stream: loginBloc.outLoginButton,
+        initialData: ButtonState(enabled: false, loading: false),
         builder: (context, snapshot){
           return RaisedButton(
             color: Colors.pink,
@@ -17,7 +25,7 @@ class LoginButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(25)
             ),
             onPressed: snapshot.data.enabled ? (){
-
+              loginBloc.loginWithEmail();
             } : null,
             child: snapshot.data.loading ?
               CircularProgressIndicator(

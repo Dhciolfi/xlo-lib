@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   );
                 },
               ),
-              LoginButton(),
+              LoginButton(_loginBloc),
             ],
           ),
         ),
