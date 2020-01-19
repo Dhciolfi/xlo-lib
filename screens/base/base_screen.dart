@@ -28,7 +28,9 @@ class _BaseScreenState extends State<BaseScreen> {
 
       _drawerSubscription?.cancel();
       _drawerSubscription = _drawerBloc.outPage.listen((page){
-        _pageController.jumpToPage(page);
+        try {
+          _pageController.jumpToPage(page);
+        } catch (e) {}
       });
     }
   }
