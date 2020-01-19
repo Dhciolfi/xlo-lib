@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class PasswordField extends StatelessWidget {
+
+  PasswordField({this.onSaved});
+
+  final FormFieldSetter<String> onSaved;
+
   @override
   Widget build(BuildContext context) {
 
@@ -20,14 +25,23 @@ class PasswordField extends StatelessWidget {
 
     return FormField<String>(
       initialValue: '',
+      onSaved: onSaved,
+      validator: (text){
+        if(text.isEmpty || _calcScore(text) < 2)
+          return 'Senha inválida';
+        return null;
+      },
+      autovalidate: true,
       builder: (state){
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             TextField(
               decoration: const InputDecoration(border: OutlineInputBorder()),
               obscureText: true,
               onChanged: state.didChange,
             ),
+            if(state.value.isNotEmpty)
             Container(
               margin: const EdgeInsets.only(top: 6),
               height: 8,
@@ -40,6 +54,17 @@ class PasswordField extends StatelessWidget {
                 ],
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(top: 6, left: 10),
+              child: state.value.isNotEmpty || state.hasError ? Text(
+                state.value.isNotEmpty ? _getText(_calcScore(state.value)) : state.errorText,
+                textAlign: TextAlign.start,
+                style: TextStyle(
+                  color: _getColor(_calcScore(state.value)),
+                  fontSize: 12,
+                ),
+              ) : Container(),
+            )
           ],
         );
       },
@@ -72,5 +97,18 @@ class PasswordField extends StatelessWidget {
     }
   }
 
-
+  String _getText(int level) {
+    switch (level) {
+      case 0:
+        return 'Senha muito fraca';
+      case 1:
+        return 'Senha razoavelmente fraca';
+      case 2:
+        return 'Senha razoavelmente forte';
+      case 3:
+        return 'Senha forte';
+      default:
+        return '';
+    }
+  }
 }

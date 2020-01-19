@@ -52,13 +52,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   return 'E-mail inválido';
                 return null;
               },
+              onSaved: (text){
+
+              },
             ),
             const SizedBox(height: 26,),
             const FieldTitle(
               title: 'Senha',
               subtitle: 'Use letras, números e caracteres especiais.',
             ),
-            PasswordField()
+            PasswordField(
+              onSaved: (text){
+
+              },
+            )
           ],
         ),
       ),
