@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:xlo/screens/signup/widgets/field_title.dart';
+import 'package:xlo/screens/signup/widgets/password_field.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -37,6 +38,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 return null;
               },
             ),
+            const SizedBox(height: 26,),
             const FieldTitle(
               title: 'E-mail',
               subtitle: 'Enviaremos um e-mail de confirmação.',
@@ -51,10 +53,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 return null;
               },
             ),
+            const SizedBox(height: 26,),
             const FieldTitle(
               title: 'Senha',
               subtitle: 'Use letras, números e caracteres especiais.',
             ),
+            PasswordField()
           ],
         ),
       ),
