@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:xlo/screens/create/widgets/image_source_sheet.dart';
 
 class ImagesField extends StatelessWidget {
   @override
@@ -18,7 +19,16 @@ class ImagesField extends StatelessWidget {
                   if(index == state.value.length)
                     return GestureDetector(
                       onTap: (){
-
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) => ImageSourceSheet(
+                            (image){
+                              if(image != null)
+                                state.didChange(state.value..add(image));
+                              Navigator.of(context).pop();
+                            }
+                          )
+                        );
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(left: 16, top: 16, bottom: 16),
@@ -42,7 +52,36 @@ class ImagesField extends StatelessWidget {
                         ),
                       ),
                     );
-                  return Container();
+                  return GestureDetector(
+                    onTap: (){
+                      showDialog(
+                        context: context,
+                        builder: (context) => Dialog(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Image.file(state.value[index]),
+                              FlatButton(
+                                child: const Text('Excluir'),
+                                textColor: Colors.red,
+                                onPressed: (){
+                                  state.didChange(state.value..removeAt(index));
+                                  Navigator.of(context).pop();
+                                },
+                              )
+                            ],
+                          ),
+                        )
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16, top: 16, bottom: 16),
+                      child: CircleAvatar(
+                        radius: 52,
+                        backgroundImage: FileImage(state.value[index]),
+                      ),
+                    ),
+                  );
                 }
               ),
             )
