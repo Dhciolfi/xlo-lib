@@ -2,6 +2,7 @@ import 'package:brasil_fields/formatter/real_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:xlo/api/api_postalcode.dart';
+import 'package:xlo/common/cep_field.dart';
 import 'package:xlo/common/custom_drawer/custom_drawer.dart';
 import 'package:xlo/screens/create/widgets/images_field.dart';
 
@@ -68,6 +69,20 @@ class _CreateScreenState extends State<CreateScreen> {
                 return null;
               },
               onSaved: (d) {
+
+              },
+            ),
+            CepField(
+              decoration: InputDecoration(
+                labelText: 'CEP *',
+                labelStyle: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  color: Colors.grey,
+                  fontSize: 18,
+                ),
+                contentPadding: const EdgeInsets.fromLTRB(16, 10, 12, 10),
+              ),
+              onSaved: (a) {
 
               },
             ),
