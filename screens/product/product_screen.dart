@@ -1,6 +1,7 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:xlo/models/ad.dart';
+import 'package:xlo/screens/product/widgets/description_panel.dart';
 import 'package:xlo/screens/product/widgets/main_panel.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -37,10 +38,10 @@ class ProductScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 MainPanel(ad),
-                /*Divider(),
+                Divider(),
                 DescriptionPanel(ad),
                 Divider(),
-                LocationPanel(ad),
+                /*LocationPanel(ad),
                 Divider(),
                 UserPanel(ad),*/
               ],
