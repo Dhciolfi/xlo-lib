@@ -1,6 +1,8 @@
 import 'package:brasil_fields/formatter/telefone_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:xlo/models/user.dart';
+import 'package:xlo/screens/editaccount/widgets/user_type_widget.dart';
 
 class EditAccountScreen extends StatefulWidget {
   @override
@@ -8,6 +10,9 @@ class EditAccountScreen extends StatefulWidget {
 }
 
 class _EditAccountScreenState extends State<EditAccountScreen> {
+
+  final User _user = User(name: 'Daniel');
+
   @override
   Widget build(BuildContext context) {
     InputDecoration _buildDecoration(String label) {
@@ -25,7 +30,14 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: <Widget>[
+          UserTypeWidget(
+            initialValue: _user.userType,
+            onSaved: (userType){
+
+            },
+          ),
           TextFormField(
+            initialValue: _user.name,
             decoration: _buildDecoration('Nome *'),
             validator: (name) {
               if (name.length < 6)
@@ -37,6 +49,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
             },
           ),
           TextFormField(
+            initialValue: _user.phone,
             decoration: _buildDecoration('Telefone *'),
             keyboardType: TextInputType.phone,
             inputFormatters: [
